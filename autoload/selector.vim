@@ -16,7 +16,7 @@ function! selector#update(height, prompt, items, pattern)
     echon a:pattern
 endfunction
 
-function! selector#run(prompt, items)
+function! selector#run(prompt, items, ...)
     new
     setlocal statusline=%#Search#Selector buftype=nofile cursorline
 
@@ -31,7 +31,8 @@ function! selector#run(prompt, items)
             call selector#update(height, a:prompt, a:items, pattern)
         elseif char == 13
             let current = getline(".")
-            if current != ""
+
+            if current != "" || get(a:, 1, v:false)
                 let pattern = current
             endif
 
@@ -72,7 +73,7 @@ function! selector#files()
 endfunction
 
 function! selector#buffers()
-    let buffer = selector#run("Buffers: ", getcompletion("", "buffer"))
+    let buffer = selector#run("Buffers: ", getcompletion("", "buffer"), v:true)
     if buffer != ""
         execute "buffer " . buffer
     endif

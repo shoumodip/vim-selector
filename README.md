@@ -12,3 +12,8 @@ Plug 'shoumodip/vim-selector'
 | `selector#files`   | Find files recursively |
 | `selector#browse`  | Browse the filesystem  |
 | `selector#buffers` | Switch buffers         |
+
+## API
+```vim
+selector#run({prompt}, {items}, [, {needs_match}])
+```

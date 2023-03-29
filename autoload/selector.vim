@@ -18,7 +18,7 @@ endfunction
 
 function! selector#run(prompt, items, ...)
     new
-    setlocal statusline=%#Search#Selector buftype=nofile cursorline
+    setlocal statusline=Selector buftype=nofile cursorline
 
     let height = winheight(0)
     let pattern = ""
@@ -43,7 +43,7 @@ function! selector#run(prompt, items, ...)
         elseif char == 16
             normal! k
             redraw
-        elseif char == 27
+        elseif char == 27 || (char == 107 && pattern[-1:] ==# 'j')
             let pattern = ""
             break
         else
